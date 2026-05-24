@@ -1,0 +1,7 @@
+import pandas as pd
+from sklearn.cluster import KMeans
+df=pd.read_csv("C:\\Users\\Barsha\\Downloads\\Cost_of_Living_Index_2022 (2).csv")
+x=df[['Cost of Living Index']]
+kmeans=KMeans(n_clusters=3, random_state=42)
+df['cluster'] = kmeans.fit_predict(x)
+print(df[['Country', 'Cost of Living Index', 'cluster']].head(139))
