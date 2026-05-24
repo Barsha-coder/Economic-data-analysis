@@ -5,3 +5,31 @@ x=df[['Cost of Living Index']]
 kmeans=KMeans(n_clusters=3, random_state=42)
 df['cluster'] = kmeans.fit_predict(x)
 print(df[['Country', 'Cost of Living Index', 'cluster']].head(139))
+
+# correlation between cost of living index and groceries index
+
+cost_living=df['Cost of Living Index']
+groceries=df['Groceries Index']
+correlation=cost_living.corr(groceries)
+print("correlation between cost of living index and groceries index:")
+print(correlation)
+
+# line chart
+
+import matplotlib.pyplot as plt
+plt.figure(figsize=(10,6))
+plt.plot(df['Country'],cost_living,label='cost of living index')
+plt.plot(df['Country'],groceries,label='groceries index')
+plt.xlabel('Country')
+plt.ylabel('index value')
+plt.title('cost of living index vs groceries index')
+plt.show()
+
+# countries in ascending order by local purchaing power index and bar chat ploted
+
+df_sorted=df.sort_values(by='Local Purchasing Power Index', ascending=True)
+plt.figure(figsize=(12,8))
+plt.bar(df_sorted["Country"], df_sorted["Local Purchasing Power Index"])
+plt.xlabel("countries")
+plt.ylabel("local purchasing power index")
+plt.show()
