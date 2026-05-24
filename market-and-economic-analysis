@@ -58,3 +58,33 @@ x=df["Cost of Living Index"]
 y=df["Local Purchasing Power Index"]
 correlation = x.corr(y)
 print(correlation )
+
+#Which country have the lowest resturant price index and how does it relate to the overall cost of living index
+restaurant_data = df[["Country","Restaurant Price Index","Cost of Living Index"]]
+lowest_restaurant=restaurant_data.sort_values(by="Restaurant Price Index", ascending=True).head(10)
+print(lowest_restaurant)
+import matplotlib.pyplot as plt
+plt.bar(lowest_restaurant["Country"],lowest_restaurant["Restaurant Price Index"],label="Restaurant Price Index")
+plt.plot(lowest_restaurant["Country"],lowest_restaurant["Cost of Living Index"], marker='o',label="Cost of living index",color='yellow')
+plt.xlabel("countries")
+plt.ylabel("index values")
+plt.show()
+
+correlation=df["Restaurant Price Index"].corr(df["Cost of Living Index"])
+print("the value:")
+print(correlation)
+
+#How does local purchasing power index vary among countries with similar cost of living index values
+df_sorted=df.sort_values(by='Cost of Living Index')
+similar = df[(df['Cost of Living Index']>=40) & (df['Cost of Living Index']<=45)][['Country','Cost of Living Index','Local Purchasing Power Index']]
+print('this value:')
+print(similar)
+plt.figure(figsize=(12,6))
+
+plt.plot(similar['Country'],similar['Cost of Living Index'],color='yellow', label='Cost of Living Index')
+
+plt.plot(similar['Country'],similar['Local Purchasing Power Index'],marker='o',label='Local Purchasing Power Index')
+
+plt.xlabel('countries')
+plt.ylabel('index values')
+plt.show()
