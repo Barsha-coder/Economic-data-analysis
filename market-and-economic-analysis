@@ -45,3 +45,16 @@ for col in index_columns:
     print(highest)
     print(f"\nTop 5 Lowest Countries by {col}")
     print(lowest)
+
+# Most Balanced Countries
+index_columns=["Cost of Living Index","Rent Index","Groceries Index","Restaurant Price Index","Local Purchasing Power Index"]
+df["Balance Score"]= df[index_columns].std(axis=1)
+balanced = df[["Country","Balance Score"]].sort_values(by="Balance Score").head(10)
+
+print("Top 10 Most Balanced Countries:")
+print(balanced)
+#Trend between cost of living and local purchasing power index
+x=df["Cost of Living Index"]
+y=df["Local Purchasing Power Index"]
+correlation = x.corr(y)
+print(correlation )
