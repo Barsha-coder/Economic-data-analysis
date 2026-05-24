@@ -33,3 +33,15 @@ plt.bar(df_sorted["Country"], df_sorted["Local Purchasing Power Index"])
 plt.xlabel("countries")
 plt.ylabel("local purchasing power index")
 plt.show()
+
+# compare countries with highest index and lowest index
+index_columns=["Cost of Living Index","Rent Index","Groceries Index","Restaurant Price Index","Local Purchasing Power Index"]
+
+# Loop through indices
+for col in index_columns:
+    highest = df[["Country",col]].sort_values(by=col, ascending=False).head(5)
+    lowest = df[["Country",col]].sort_values(by=col, ascending=True).head(5)
+    print(f"\nTop 5 Highest Countries by {col}")
+    print(highest)
+    print(f"\nTop 5 Lowest Countries by {col}")
+    print(lowest)
