@@ -88,3 +88,47 @@ plt.plot(similar['Country'],similar['Local Purchasing Power Index'],marker='o',l
 plt.xlabel('countries')
 plt.ylabel('index values')
 plt.show()
+
+# low cost countries
+low_cost = df[df['Cost of Living Index']<30][['Country','Cost of Living Index','Local Purchasing Power Index']]
+
+# medium cost countries
+medium_cost = df[(df['Cost of Living Index']>=30) & (df['Cost of Living Index']<=60)][['Country','Cost of Living Index','Local Purchasing Power Index']]
+
+# high cost countries
+high_cost = df[df['Cost of Living Index']>=60][['Country','Cost of Living Index','Local Purchasing Power Index']]
+print('\nlow cost countries')
+print(low_cost.head(5))
+print('medium')
+print(medium_cost.head(5))
+print('high')
+print(high_cost.head(5))
+
+# high Local Purchasing Power Index countries
+high = df[df['Local Purchasing Power Index']>= df['Local Purchasing Power Index'].median()]
+# lowLocal Purchasing Power Index countries
+low = df[df['Local Purchasing Power Index']< df['Local Purchasing Power Index'].median()]
+# mean , median , stander deviation for cost of living index
+#high countries
+mean_col = high['Cost of Living Index'].mean()
+median_col = high['Cost of Living Index'].median()
+std_col=high['Cost of Living Index'].std()
+print('high countries descriptive stat')
+print('mean',mean_col)
+print('median',median_col)
+print('standard deviation',std_col)
+#low countries
+low_mean = high['Cost of Living Index'].mean()
+low_median = high['Cost of Living Index'].median()
+low_std=high['Cost of Living Index'].std()
+print('low countries descriptive stat')
+print(low_mean ,low_median,low_std)
+
+#find countries with lowest restaurant price index
+lowest_price = df.sort_values(by='Restaurant Price Index')
+print('countries with lowest restaurant price index')
+print(lowest_price[['Country','Restaurant Price Index','Cost of Living Index']])
+# correlation
+correlation = lowest_price['Restaurant Price Index'].corr( lowest_price['Cost of Living Index'])
+print('correlation')
+print(correlation)
